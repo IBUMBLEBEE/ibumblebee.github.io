@@ -87,8 +87,11 @@
         <h2 id="关于Office-365-安装步骤"><a href="#关于Office-365-安装步骤" class="headerlink" title="关于Office 365 安装步骤"></a>关于Office 365 安装步骤</h2><h3 id="手工修改配置文件方法"><a href="#手工修改配置文件方法" class="headerlink" title="手工修改配置文件方法"></a>手工修改配置文件方法</h3><ol>
 <li>将office365 离线安装包解压并拷贝至磁盘剩余较多的目录（不一定要是C盘，现在的Office365 安装；路径默认C盘，并且不可选择）。</li>
 <li>选择对应操作系统x86和x64系统对应安装包的目录，找到对应的配置文件 <code>configuration-Office365-x64.xml</code>（如 64位系统的安装目录）。</li>
-<li>用记事本或者可以打开该文件的编辑器打开，找到对应的XML 节点属性值 SourcePath，对应该值和该配置文件所在的目录是否一致（复制当前目录路径方法：选中文件夹导航路径，全选复制）。如果值不一致，则修改成对应的路径，一致则不需要修改。为防止安装的时候报错，在SourcePath同一节点的属性内加一个值 </li>
+<li>用记事本或者可以打开该文件的编辑器打开，找到对应的XML 节点属性值 SourcePath，对应该值和该配置文件所在的目录是否一致（复制当前目录路径方法：选中文件夹导航路径，全选复制）</li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SourcePath=&quot;D:\xxx\Office 365&quot;</span><br></pre></td></tr></table></figure>
+
+<p>如果值不一致，则修改成对应的路径，一致则不需要修改。为防止安装的时候报错，在SourcePath同一节点的属性内加一个值 </p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllowCdnFallback="True"</span><br></pre></td></tr></table></figure>
 
 <p>配置完成以后的配置文件类似如下：</p>
@@ -102,7 +105,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/Office365-install/" data-id="cjyykla3k00008cuqkafsp0i8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/Office365-install/" data-id="cjyykqcfc00000guq5mf9q1r7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/hello-world/" data-id="cjyykla3q00018cuqo7hhe4o0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/hello-world/" data-id="cjyykqcfi00010guq20q4d2oz" class="article-share-link">Share</a>
       
       
     </footer>
