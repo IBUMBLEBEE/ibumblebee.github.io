@@ -7,17 +7,17 @@
   
   <title>Office365 安装 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于Office 365 安装问题">
+  <meta name="description" content="关于Office 365 安装步骤手工修改配置文件方法 将office365 离线安装包解压并拷贝至磁盘剩余较多的目录（不一定要是C盘，现在的Office365 安装；路径默认C盘，并且不可选择）。 选择对应操作系统x86和x64系统对应安装包的目录，找到对应的配置文件 configuration-Office365-x64.xml（如 64位系统的安装目录）。 用记事本或者可以打开该文件的编辑器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Office365 安装">
 <meta property="og:url" content="http://yoursite.com/2019/08/05/Office365-install/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于Office 365 安装问题">
+<meta property="og:description" content="关于Office 365 安装步骤手工修改配置文件方法 将office365 离线安装包解压并拷贝至磁盘剩余较多的目录（不一定要是C盘，现在的Office365 安装；路径默认C盘，并且不可选择）。 选择对应操作系统x86和x64系统对应安装包的目录，找到对应的配置文件 configuration-Office365-x64.xml（如 64位系统的安装目录）。 用记事本或者可以打开该文件的编辑器">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-05T15:35:56.892Z">
+<meta property="og:updated_time" content="2019-08-05T15:49:06.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Office365 安装">
-<meta name="twitter:description" content="关于Office 365 安装问题">
+<meta name="twitter:description" content="关于Office 365 安装步骤手工修改配置文件方法 将office365 离线安装包解压并拷贝至磁盘剩余较多的目录（不一定要是C盘，现在的Office365 安装；路径默认C盘，并且不可选择）。 选择对应操作系统x86和x64系统对应安装包的目录，找到对应的配置文件 configuration-Office365-x64.xml（如 64位系统的安装目录）。 用记事本或者可以打开该文件的编辑器">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -86,11 +86,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="关于Office-365-安装问题"><a href="#关于Office-365-安装问题" class="headerlink" title="关于Office 365 安装问题"></a>关于Office 365 安装问题</h1>
+        <h2 id="关于Office-365-安装步骤"><a href="#关于Office-365-安装步骤" class="headerlink" title="关于Office 365 安装步骤"></a>关于Office 365 安装步骤</h2><h3 id="手工修改配置文件方法"><a href="#手工修改配置文件方法" class="headerlink" title="手工修改配置文件方法"></a>手工修改配置文件方法</h3><ol>
+<li>将office365 离线安装包解压并拷贝至磁盘剩余较多的目录（不一定要是C盘，现在的Office365 安装；路径默认C盘，并且不可选择）。</li>
+<li>选择对应操作系统x86和x64系统对应安装包的目录，找到对应的配置文件 <code>configuration-Office365-x64.xml</code>（如 64位系统的安装目录）。</li>
+<li>用记事本或者可以打开该文件的编辑器打开，找到对应的XML 节点属性值 SourcePath，对应该值和该配置文件所在的目录是否一致（复制当前目录路径方法：选中文件夹导航路径，全选复制）。如果值不一致，则修改成对应的路径，一致则不需要修改。为防止安装的时候报错，在SourcePath同一节点的属性内加一个值 </li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AllowCdnFallback="True"</span><br></pre></td></tr></table></figure>
+
+<p>配置完成以后的配置文件类似如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Office 365 client configuration file sample. To be used for Office 365 ProPlus apps, </span></span><br><span class="line"><span class="comment">     Office 365 Business apps, Project Pro for Office 365 and Visio Pro for Office 365. </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     For detailed information regarding configuration options visit: http://aka.ms/ODT. </span></span><br><span class="line"><span class="comment">     To use the configuration file be sure to remove the comments</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">     The following sample allows you to download and install the 64 bit version of the Office 365 ProPlus apps </span></span><br><span class="line"><span class="comment">     and Visio Pro for Office 365 directly from the Office CDN using the Monthly Channel</span></span><br><span class="line"><span class="comment">     settings  --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">Configuration</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Add</span> <span class="attr">SourcePath</span>=<span class="string">"G:\GitHub\Code\pycode"</span> <span class="attr">OfficeClientEdition</span>=<span class="string">"64"</span> <span class="attr">Channel</span>=<span class="string">"Monthly"</span> <span class="attr">AllowCdnFallback</span>=<span class="string">"True"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Product</span> <span class="attr">ID</span>=<span class="string">"O365ProPlusRetail"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">Language</span> <span class="attr">ID</span>=<span class="string">"zh-cn"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">Product</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Add</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--  &lt;Updates Enabled="TRUE" Channel="Monthly" /&gt; --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Display</span> <span class="attr">Level</span>=<span class="string">"Full"</span> <span class="attr">AcceptEULA</span>=<span class="string">"TRUE"</span> /&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--  &lt;Property Name="AUTOACTIVATE" Value="1" /&gt;  --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>保存关闭编辑器。</p>
+<ol start="4">
+<li>双击setup.dat安装文件开始安装office365。</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/08/05/Office365-install/" data-id="cjyyk4dfe0000d8uq89cvmkcj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/08/05/Office365-install/" data-id="cjyykla3k00008cuqkafsp0i8" class="article-share-link">Share</a>
       
       
     </footer>
