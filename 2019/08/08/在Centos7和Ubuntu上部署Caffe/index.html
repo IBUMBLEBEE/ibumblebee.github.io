@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>在Centos7和Ubuntu上部署Caffe | IBUMBLEBEE 博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Centos Caffe 部署前置条件 Centos 7 OpenCV 3.3.1 Cmake-3.15.1 Python 2.7.5 virtualenv 虚拟环境  编译 OpenCV安装依赖包12345678910111213141516sudo yum -y install epel-release \            git wget unzip gcc gcc-c++ cmake">
+<meta name="keywords" content="DevOps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Centos7和Ubuntu上部署Caffe">
+<meta property="og:url" content="https://ibumblebee.github.io/2019/08/08/在Centos7和Ubuntu上部署Caffe/index.html">
+<meta property="og:site_name" content="IBUMBLEBEE 博客">
+<meta property="og:description" content="Centos Caffe 部署前置条件 Centos 7 OpenCV 3.3.1 Cmake-3.15.1 Python 2.7.5 virtualenv 虚拟环境  编译 OpenCV安装依赖包12345678910111213141516sudo yum -y install epel-release \            git wget unzip gcc gcc-c++ cmake">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-08-08T07:12:04.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Centos7和Ubuntu上部署Caffe">
+<meta name="twitter:description" content="Centos Caffe 部署前置条件 Centos 7 OpenCV 3.3.1 Cmake-3.15.1 Python 2.7.5 virtualenv 虚拟环境  编译 OpenCV安装依赖包12345678910111213141516sudo yum -y install epel-release \            git wget unzip gcc gcc-c++ cmake">
+  
+    <link rel="alternate" href="/atom.xml" title="IBUMBLEBEE 博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">IBUMBLEBEE 博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">读过两年书，尘世中一个迷途小书童</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ibumblebee.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-在Centos7和Ubuntu上部署Caffe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/08/在Centos7和Ubuntu上部署Caffe/" class="article-date">
+  <time datetime="2019-08-08T07:10:09.000Z" itemprop="datePublished">2019-08-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Centos7和Ubuntu上部署Caffe
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Centos-Caffe-部署"><a href="#Centos-Caffe-部署" class="headerlink" title="Centos Caffe 部署"></a>Centos Caffe 部署</h2><h3 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h3><ul>
+<li>Centos 7</li>
+<li>OpenCV 3.3.1</li>
+<li>Cmake-3.15.1</li>
+<li>Python 2.7.5</li>
+<li>virtualenv 虚拟环境</li>
+</ul>
+<h3 id="编译-OpenCV"><a href="#编译-OpenCV" class="headerlink" title="编译 OpenCV"></a>编译 OpenCV</h3><h4 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a>安装依赖包</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install epel-release \</span><br><span class="line">            git wget unzip gcc gcc-c++ cmake cmake3 \</span><br><span class="line">            qt5-qtbase-devel \</span><br><span class="line">            python python-devel python-pip \</span><br><span class="line">            gtk2-devel \</span><br><span class="line">            libpng-devel \</span><br><span class="line">            jasper-devel \</span><br><span class="line">            openexr-devel \</span><br><span class="line">            libwebp-devel \</span><br><span class="line">            libjpeg-turbo-devel \</span><br><span class="line">            freeglut-devel mesa-libGL mesa-libGL-devel \</span><br><span class="line">            libtiff-devel \</span><br><span class="line">            libdc1394-devel \</span><br><span class="line">            tbb-devel eigen3-devel \</span><br><span class="line">            libv4l-devel \</span><br><span class="line">            gstreamer-plugins-base-devel</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装-ffmpeg"><a href="#安装-ffmpeg" class="headerlink" title="安装 ffmpeg"></a>安装 ffmpeg</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install -y epel-release</span><br><span class="line">rpm -v --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro</span><br><span class="line">rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-5.el7.nux.noarch.rpm</span><br><span class="line">yum install -y ffmpeg ffmpeg-devel</span><br><span class="line">ffmpeg -version</span><br></pre></td></tr></table></figure>
+
+<h4 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv virtualenvwrapper -i https://pypi.doubanio.com/simple/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里注意使用Python2和Python3</span></span><br><span class="line">echo "export WORKON_HOME=/root/.virtualenvs" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "source /usr/bin/virtualenvwrapper.sh" &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br><span class="line">mkvirtualenv OpenCV-3.3.1-py2 -p python</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下次进入的时候使用</span></span><br><span class="line">workon OpenCV-3.3.1-py2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 阿里云服务器默认选用阿里源，可取消 -i 参数</span></span><br><span class="line">pip install cmake -i https://pypi.doubanio.com/simple/</span><br><span class="line">pip install numpy==1.11.0 scipy==0.17.0 matplotlib==2.1.1 scikit-image==0.13.1  ipython==5.5 scikit-learn dlib -i https://pypi.doubanio.com/simple/</span><br></pre></td></tr></table></figure>
+
+<h4 id="OpenCV-编译安装"><a href="#OpenCV-编译安装" class="headerlink" title="OpenCV 编译安装"></a>OpenCV 编译安装</h4><p>OpenCV 安装版本选择是根据 anaconda 安装 Caffe 时，依赖安装的是 OpenCV-3.3.1。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载对应版本的OpenCV，并解压</span></span><br><span class="line"></span><br><span class="line">mkdir /opt/opencv_3rdparty</span><br><span class="line">cd /opt/opencv_3rdparty</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 下载编译OpenCV时需要的依赖</span></span><br><span class="line"></span><br><span class="line">sed -i 's/https:\/\/raw.githubusercontent.com\/opencv\/opencv_3rdparty\/\$&#123;IPPICV_COMMIT&#125;\/ippicv\//file:\/\/\/opt\/opencv_3rdparty\//g' ./opencv-3.3.1/3rdparty/ippicv/ippicv.cmake</span><br><span class="line"></span><br><span class="line">export ENV_OPENCV_PY=/root/.virtualenvs/OpenCV-3.3.1-py2</span><br><span class="line">cd opencv-3.3.1 &amp;&amp; mkdir build &amp;&amp; cd build</span><br><span class="line"><span class="meta">#</span><span class="bash"> CMAKE_INSTALL_PREFIX 安装路径，这个一般指定Python模块安装路径的lib上层。当然还可以指定别的路径，注意加载环境变量。在虚拟环境中，直接是家目录。该包生成的Python模块是标准的，可以直接指定Python包安装路径。如果安装错误也没关系，可以使用软链接方式，具体方式请自行网上查找。</span></span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=Release \</span><br><span class="line">      -D WITH_FFMPEG=ON \</span><br><span class="line">      -D CMAKE_INSTALL_PREFIX=$ENV_OPENCV_PY \</span><br><span class="line">      -D PYTHON_EXECUTABLE=$ENV_OPENCV_PY/bin/python \</span><br><span class="line">      -D PYTHON_INCLUDE_DIR=$ENV_OPENCV_PY/include/python2.7 \</span><br><span class="line">      -D PYTHON_LIBRARY=$ENV_OPENCV_PY/lib/python2.7/config/libpython2.7.so \</span><br><span class="line">      -D PYTHON_NUMPY_INCLUDE_DIRS=$ENV_OPENCV_PY/lib/python2.7/site-packages/numpy/core/include/ ..</span><br><span class="line"></span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试生成的Python 模块</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;import cv2</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;import os.path.dirname(os.__file__)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编译-Caffe"><a href="#编译-Caffe" class="headerlink" title="编译 Caffe"></a>编译 Caffe</h3><h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><p>按照官网要求，安装 boost-devel 开发包时会安装依赖包 boost-1.53，该版本过低，暂不安装。</p>
+<h4 id="编译安装-Boost-1-58-（Caffe-编译需要依赖这个-C-库，版本-1-55-以上）"><a href="#编译安装-Boost-1-58-（Caffe-编译需要依赖这个-C-库，版本-1-55-以上）" class="headerlink" title="编译安装 Boost-1.58 （Caffe 编译需要依赖这个 C++库，版本 1.55 以上）"></a>编译安装 Boost-1.58 （Caffe 编译需要依赖这个 C++库，版本 1.55 以上）</h4><p>由于 Centos yum 安装是 Boost-1.53 版本，不符合要求。需要编译安装。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc-c++ python-devel bzip2-devel zlib-devel</span><br><span class="line">wget https://nchc.dl.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.zip</span><br><span class="line">unzip boost_1_58_0.zip</span><br><span class="line">cd boost_1_58_0 &amp;&amp; ./bootstrap.sh --prefix=/usr/local/boost</span><br><span class="line">./b2</span><br><span class="line">cd tools/build &amp;&amp; ./bootstrap.sh</span><br><span class="line">./b2 install --prefix=/usr/local/boost</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">yum install -y protobuf-devel leveldb-devel snappy-devel hdf5-devel</span><br><span class="line"></span><br><span class="line">pip install protobuf -i https://pypi.doubanio.com/simple/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> glog 请注意，glog不能使用最新的gflags版本（2.1）进行编译，因此在解决之前，您需要先使用glog进行构建。</span></span><br><span class="line">wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/google-glog/glog-0.3.3.tar.gz</span><br><span class="line">tar zxvf glog-0.3.3.tar.gz</span><br><span class="line">cd glog-0.3.3</span><br><span class="line">./configure</span><br><span class="line">make -j$(nproc) &amp;&amp; make install</span><br><span class="line"><span class="meta">#</span><span class="bash"> gflags</span></span><br><span class="line">wget https://github.com/schuhschuh/gflags/archive/master.zip</span><br><span class="line">unzip master.zip</span><br><span class="line">cd gflags-master</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line">export CXXFLAGS="-fPIC" &amp;&amp; cmake .. &amp;&amp; make VERBOSE=1</span><br><span class="line">make -j$(nproc) &amp;&amp; make install</span><br><span class="line"><span class="meta">#</span><span class="bash"> lmdb</span></span><br><span class="line">git clone https://github.com/LMDB/lmdb</span><br><span class="line">cd lmdb/libraries/liblmdb</span><br><span class="line">make -j$(nproc) &amp;&amp; make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 为获得更好的CPU 性能</span></span><br><span class="line">yum install -y atlas-devel</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用cmake 编译</span></span><br><span class="line">git clone https://github.com/BVLC/caffe.git</span><br><span class="line">cd caffe</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改编译配置</span></span><br><span class="line">cp Makefile.config.example Makefile.config</span><br><span class="line"><span class="meta">#</span><span class="bash"> CPU_ONLY=1 仅仅 CPU 模式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BLAS := atlas  CPU更好性能</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BLAS_INCLUDE := /usr/include/atlas</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BLAS_LIB := /usr/lib64/atlas</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Python库相关路径配置</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> PYTHON_INCLUDE，PYTHON_LIB</span></span><br><span class="line"></span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 该文档只是使用cmake编译，make编译尚未验证。cmake编译时需要atlas相关的动态库，不然编译时会报错找不到Atlas_CBLAS_LIBRARY,Atlas_BLAS_LIBRARY,Atlas_LAPACK_LIBRARY 库。cmake 编译的Makefile在Caffe源码目录下<span class="variable">$CAFFE_ROOT</span>/cmake/Modules/FindAtlas.cmake</span></span><br><span class="line">ln -sv /usr/lib64/atlas/libsatlas.so.3.10 /usr/lib64/atlas/libcblas.so</span><br><span class="line">ln -sv /usr/lib64/atlas/libsatlas.so.3.10 /usr/lib64/atlas/libatlas.so</span><br><span class="line">ln -sv /usr/lib64/atlas/libsatlas.so.3.10 /usr/lib64/atlas/liblapack.so</span><br><span class="line"></span><br><span class="line">cmake ..</span><br><span class="line">make -j$(nproc) all</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 这里编译完成之后，会有相关的设置环境变量提示，注意保存并添加环境变量。</span></span><br><span class="line">make -j$(nproc) install</span><br><span class="line">make -j$(nproc) runtest</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置环境变量到~/.bashrc，注意是虚拟环境的家目录。</span></span><br><span class="line">export CAFFE_ROOT=/opt/caffe-1.0</span><br><span class="line">export PYCAFFE_ROOT=$CAFFE_ROOT/build/install/python</span><br><span class="line">export PYTHONPATH=$PYCAFFE_ROOT:$PYTHONPATH</span><br><span class="line">export PATH=$CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$CAFFE_ROOT/build/install/lib:/opt/boost_1_58_0/stage/lib:$WORKON_HOME/OpenCV-3.3.1-py2/lib:/usr/local/lib:/usr/lib64/atlas:$CAFFE_ROOT/build/install/python/caffe/_caffe.so:$PATH</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br><span class="line"></span><br><span class="line">echo /opt/caffe-1.0/build/lib &gt; /etc/ld.so.conf.d/caffe.conf</span><br><span class="line">ldconfig</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试caffe</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;import caffe</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;import os</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;<span class="built_in">print</span> os.path.dirname(caffe.__file__)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Ubuntu-Caffe-OpenCV-安装部署"><a href="#Ubuntu-Caffe-OpenCV-安装部署" class="headerlink" title="Ubuntu Caffe OpenCV 安装部署"></a>Ubuntu Caffe OpenCV 安装部署</h2><h3 id="前置条件-1"><a href="#前置条件-1" class="headerlink" title="前置条件"></a>前置条件</h3><ul>
+<li>Ubuntu 16.04</li>
+<li>OpenCV 3.3.1</li>
+<li>Cmake-3.15.1</li>
+<li>Python 2.7.12</li>
+</ul>
+<h3 id="编译-OpenCV-1"><a href="#编译-OpenCV-1" class="headerlink" title="编译 OpenCV"></a>编译 OpenCV</h3><h4 id="安装依赖包-1"><a href="#安装依赖包-1" class="headerlink" title="安装依赖包"></a>安装依赖包</h4><p>安装 Python 以及 OpenCV 安装所需的其他库和包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install cmake</span><br><span class="line">sudo apt-get install build-essential \</span><br><span class="line">             libgtk2.0-dev \</span><br><span class="line">             libavcodec-dev \</span><br><span class="line">             libavformat-dev \</span><br><span class="line">             libjpeg.dev \</span><br><span class="line">             libtiff4.dev \</span><br><span class="line">             libswscale-dev \</span><br><span class="line">             libjasper-dev</span><br></pre></td></tr></table></figure>
+
+<h4 id="开始安装"><a href="#开始安装" class="headerlink" title="开始安装"></a>开始安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 这里的包版本是按照项目Python包的具体版本安装的，不是必须这样的。只需要满足条件即可。</span></span><br><span class="line">pip install numpy==1.11.0 scipy==0.17.0 matplotlib==2.1.1 scikit-image==0.13.1  ipython==5.5 scikit-learn dlib</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改编译安装下载依赖</span></span><br><span class="line">mkdir /opt/opencv_3rdparty</span><br><span class="line">cd /opt/opencv_3rdparty</span><br><span class="line">wget https://raw.githubusercontent.com/opencv/opencv_3rdparty/ippicv/master_20180723/ippicv/ippicv_2019_lnx_intel64_general_20180723.tgz</span><br><span class="line"></span><br><span class="line">wget https://github.com/opencv/opencv/archive/opencv-3.3.1.zip</span><br><span class="line">unzip opencv-3.3.1.zip</span><br><span class="line">cd opencv-3.3.1</span><br><span class="line">sed -i 's/https:\/\/raw.githubusercontent.com\/opencv\/opencv_3rdparty\/\$&#123;IPPICV_COMMIT&#125;\/ippicv\//file:\/\/\/opt\/opencv_3rdparty\//g' ./opencv-3.3.1/3rdparty/ippicv/ippicv.cmake</span><br><span class="line"></span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意修改对应路径地址 python 路径，有可能是虚拟环境的</span></span><br><span class="line">cmake -D CMAKE_BUILD_TYPE=Release \</span><br><span class="line">      -D WITH_FFMPEG=ON \</span><br><span class="line">      -D CMAKE_INSTALL_PREFIX=/usr/local \</span><br><span class="line">      -D OPENCV_PYTHON2_INSTALL_PATH=/usr/local/lib/python2.7/dist-packages/ \</span><br><span class="line">      -D PYTHON_EXECUTABLE=/usr/bin/python \</span><br><span class="line">      -D PYTHON_INCLUDE_DIR=/usr/include/python2.7 \</span><br><span class="line">      -D PYTHON_INCLUDE_DIR2=/usr/include/x86_64-linux-gnu/python2.7 \</span><br><span class="line">      -D PYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython2.7.so \</span><br><span class="line">      -D PYTHON_INCLUDE_DIRS=/usr/local/lib/python2.7/dist-packages/numpy/core/include/ ..</span><br><span class="line"></span><br><span class="line">make -j$(nproc)</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<h4 id="测试-OpenCV-Python-模块"><a href="#测试-OpenCV-Python-模块" class="headerlink" title="测试 OpenCV Python 模块"></a>测试 OpenCV Python 模块</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">print</span> cv2.__version__</span><br><span class="line"><span class="number">3.3</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="编译-Caffe-1"><a href="#编译-Caffe-1" class="headerlink" title="编译 Caffe"></a>编译 Caffe</h3><h4 id="通用依赖"><a href="#通用依赖" class="headerlink" title="通用依赖"></a>通用依赖</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update &amp;&amp; apt-get install -y --no-install-recommends \</span><br><span class="line">        build-essential \</span><br><span class="line">        cmake \</span><br><span class="line">        git \</span><br><span class="line">        wget \</span><br><span class="line">        libatlas-base-dev \</span><br><span class="line">        libboost-all-dev \</span><br><span class="line">        libgflags-dev \</span><br><span class="line">        libgoogle-glog-dev \</span><br><span class="line">        libhdf5-serial-dev \</span><br><span class="line">        libleveldb-dev \</span><br><span class="line">        liblmdb-dev \</span><br><span class="line">        libopencv-dev \</span><br><span class="line">        libprotobuf-dev \</span><br><span class="line">        libsnappy-dev \</span><br><span class="line">        protobuf-compiler \</span><br><span class="line">        python-dev \</span><br><span class="line">        python-numpy \</span><br><span class="line">        python-pip \</span><br><span class="line">        python-setuptools \</span><br><span class="line">        python-scipy</span><br></pre></td></tr></table></figure>
+
+<h4 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载源码 解压</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装编译依赖的Python，在caffe 源码包Python目录下，尽量安装项目依赖的包的具体版本安装，只要满足python目录下包版本需求即可。</span></span><br><span class="line"></span><br><span class="line">cd python &amp;&amp; for req in $(cat requirements.txt); do pip install $req; done &amp;&amp; cd ..</span><br><span class="line">mkdir build &amp;&amp; cd build</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅CPU加速</span></span><br><span class="line">cmake -D CPU_ONLY=1 ..</span><br><span class="line">make -j$(nproc)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置Caffe Python包环境变量</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Caffe 源码包路径视情况而定</span></span><br><span class="line">echo "export CAFFE_ROOT=/opt/download/caffe-1.0" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "export PYCAFFE_ROOT=$CAFFE_ROOT/python" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "export PYTHONPATH=$PYCAFFE_ROOT:$PYTHONPATH" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "export PATH=$CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH" &gt;&gt; ~/.bashrc</span><br><span class="line">echo "$CAFFE_ROOT/build/lib" &gt;&gt; /etc/ld.so.conf.d/caffe.conf &amp;&amp; ldconfig</span><br><span class="line"></span><br><span class="line">source ~/.bashrc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试Caffe 包是否可用</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;import caffe</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;<span class="built_in">print</span> caffe.__version__</span></span><br><span class="line">1.0.0</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ibumblebee.github.io/2019/08/08/在Centos7和Ubuntu上部署Caffe/" data-id="cjz2cg1mo0002j0uqjyue8ynw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/06/istio-组件之-Pilot/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">istio 组件之 Pilot</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/08/在Centos7和Ubuntu上部署Caffe/">在Centos7和Ubuntu上部署Caffe</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/06/istio-组件之-Pilot/">istio 组件之 Pilot</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/05/Office365-install/">Office365 安装</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/05/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 IBUMBLEBEE<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
