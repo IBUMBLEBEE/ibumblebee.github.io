@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-cn">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="Python 面向对象编程思想理解面向对象，理解基础概念： 面向对象编程（Object Oriented）是将现实问题构建关系，然后抽象成类（class），给类定义属性和方法后，再将类实例化成实例（instance），通过访问实例的属性和调用方法来进行使用。 面向对象的三大特征：封装、继承、多态。 面向对象常用术语 类（Class）：用来描述具有相同属性和方法的对象的集合。它定义了该集合中每个对象">
+<meta name="keywords" content="DevOps">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 面向对象编程">
+<meta property="og:url" content="https://ibumblebee.github.io/2019/09/12/Python-面向对象编程/index.html">
+<meta property="og:site_name" content="IBUMBLEBEE 博客">
+<meta property="og:description" content="Python 面向对象编程思想理解面向对象，理解基础概念： 面向对象编程（Object Oriented）是将现实问题构建关系，然后抽象成类（class），给类定义属性和方法后，再将类实例化成实例（instance），通过访问实例的属性和调用方法来进行使用。 面向对象的三大特征：封装、继承、多态。 面向对象常用术语 类（Class）：用来描述具有相同属性和方法的对象的集合。它定义了该集合中每个对象">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-09-26T17:14:00.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 面向对象编程">
+<meta name="twitter:description" content="Python 面向对象编程思想理解面向对象，理解基础概念： 面向对象编程（Object Oriented）是将现实问题构建关系，然后抽象成类（class），给类定义属性和方法后，再将类实例化成实例（instance），通过访问实例的属性和调用方法来进行使用。 面向对象的三大特征：封装、继承、多态。 面向对象常用术语 类（Class）：用来描述具有相同属性和方法的对象的集合。它定义了该集合中每个对象">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://ibumblebee.github.io/2019/09/12/Python-面向对象编程/">
+
+
+
+
+
+  <title>Python 面向对象编程 | IBUMBLEBEE 博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">IBUMBLEBEE 博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">读过两年书，尘世中一个迷途小书童</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ibumblebee.github.io/2019/09/12/Python-面向对象编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="IBUMBLEBEE">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="IBUMBLEBEE 博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 面向对象编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-12T11:22:14+08:00">
+                2019-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Python-面向对象编程思想"><a href="#Python-面向对象编程思想" class="headerlink" title="Python 面向对象编程思想"></a>Python 面向对象编程思想</h2><p>理解面向对象，理解基础概念：</p>
+<p><strong>面向对象编程</strong>（Object Oriented）是将现实问题构建关系，然后抽象成类（class），给类定义属性和方法后，再将类实例化成实例（instance），通过访问实例的属性和调用方法来进行使用。</p>
+<p>面向对象的三大特征：封装、继承、多态。</p>
+<h2 id="面向对象常用术语"><a href="#面向对象常用术语" class="headerlink" title="面向对象常用术语"></a>面向对象常用术语</h2><ul>
+<li><strong>类（Class）</strong>：用来描述具有相同属性和方法的对象的集合。它定义了该集合中每个对象所共有的属性和方法。对象是类的实例。</li>
+<li><strong>类变量</strong>：类变量在整个实例化的对象中是公用的。类变量定义在类中且在函数体之外。类变量通常不作为实例变量使用。</li>
+<li><strong>数据成员</strong>：类变量或者实例变量用于处理类及其实例对象的相关的数据。</li>
+<li><strong>方法重载</strong>：如果从父类继承的方法不能满足子类的需求，可以对其进行改写，这个过程叫方法的覆盖（override），也称为方法的重载。</li>
+<li><strong>实例变量</strong>：定义在方法中的变量，只作用于当前实例的类。</li>
+<li><strong>继承</strong>：即一个派生类（derived class）继承基类（base class）的字段和方法。继承也允许把一个派生类的对象作为一个基类对象对待。例如，有这样一个设计：一个Dog类型的对象派生自Animal类，这是模拟”是一个（is-a）”关系（例图，Dog是一个Animal）。</li>
+<li><strong>实例化</strong>：创建一个类的实例，类的具体对象。</li>
+<li><strong>方法</strong>：类中定义的函数。</li>
+<li><strong>对象</strong>：通过类定义的数据结构实例。对象包括两个数据成员（类变量和实例变量）和方法。</li>
+</ul>
+<h3 id="Python封装机制及实现方法"><a href="#Python封装机制及实现方法" class="headerlink" title="Python封装机制及实现方法"></a>Python封装机制及实现方法</h3><p><strong>封装（Encapsulation）</strong> 是面向对象的三大特征之一（另外两个是继承和多态），它指的是将对象的状态信息隐藏在对象内部，不允许外部程序直接访问对象内部信息，而是通过该类所提供的方法来实现对内部信息的操作和访问。</p>
+<p>封装机制保证了类内部数据结构的完整性，因为使用类的用户无法直接看到类中的数据结构，只能使用类允许公开的数据，很好的避免了外部对内部数据的影响，提高了程序的可维护性。总的来说，对一个类或对象实现良好的封装，可以达到以下目的：</p>
+<ul>
+<li>隐藏类的实例细节。</li>
+<li>让使用者只能通过事先预定的方法来访问数据，从而可以在该方法里加入控制逻辑，限制对属性的不合理访问。</li>
+<li>可进行数据检查，从而有利于保证对象信息的完整性。</li>
+<li>便于修改，提高代码的可维护性。</li>
+</ul>
+<p>为了实现良好的封装，需要从以下两个方面来考虑：</p>
+<ol>
+<li>将对象的属性和实现细节隐藏起来，不允许外部直接访问。</li>
+<li>把方法暴露出来，让方法来控制对这些属性进行安全的访问和操作。</li>
+</ol>
+<p>Python 并没有提供类似于其他语言的private等修饰符，因此Python并不能真正支持隐藏。为了隐藏类中的成员，将Python类的成员命名为以双下划线开头的，Python就会把它们隐藏起来。</p>
+<h3 id="Python-继承机制"><a href="#Python-继承机制" class="headerlink" title="Python 继承机制"></a>Python 继承机制</h3><p>继承是面向对象的三大特征之一，也是实现代码复用的重要手段。继承常用于创建和现有类功能类似的新类，又或是新类只需要现有类基础上添加一些成员（属性和方法），但又不想直接将现有类代码复制给新类。</p>
+<p>Python中，实现继承的类成为子类，被继承的类称为父类（也可称为基类、超类）。子类继承父类的语法是：在定义时，将多个父类放在子类之后的圆括号里。语法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> 类名<span class="params">(父类<span class="number">1</span>, 父类<span class="number">2</span>, ...)</span>:</span></span><br><span class="line">    <span class="comment">#类定义部分</span></span><br></pre></td></tr></table></figure>
+
+<p>注意Python的继承是多继承机制，即一个子类可以同时拥有多个父类。</p>
+<p>object类是所有类的父类，要么是直接父类，要么是间接父类。</p>
+<p>从子类的角度来看，子类扩展（extend）了父类；但从父类的角度来看，父类派生（derive）出子类。也就是说，扩展和派生所描述的是同一个动作，只是观察者的角度不同而已。</p>
+<h4 id="Python多继承"><a href="#Python多继承" class="headerlink" title="Python多继承"></a>Python多继承</h4><p>由于多继承不仅增加了编程的复杂度，而且很容易导致一些莫名的错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python 虽然在语法上明确支持多继承，但通常推荐如果不是很必要，则尽量不要使用多继承，而是使用单继承，这样可以保证编程思路更清晰，而且可以避免很多麻烦。</span><br></pre></td></tr></table></figure>
+
+<h3 id="python多态"><a href="#python多态" class="headerlink" title="python多态"></a>python多态</h3><p>对于弱类型的语言来说，变量并没有声明类型，因此同一个变量完全可以在不同的时间引用不同的对象。当同一个变量在调用同一方法时，完全可以呈现出多种行为（具体呈现出哪种行为由该变量所引用的对象来决定），这就是所谓的多态（Polymorphism）。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://wizardforcel.gitbooks.io/w3school-python/content/24.html" target="_blank" rel="noopener">Python面向对象技术简介</a></li>
+<li><a href="http://c.biancheng.net/view/2287.html" target="_blank" rel="noopener">Python 封装机制及实现方法</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/08/在Centos7和Ubuntu上部署Caffe/" rel="next" title="在Centos7和Ubuntu上部署Caffe">
+                <i class="fa fa-chevron-left"></i> 在Centos7和Ubuntu上部署Caffe
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/16/supervisor 部署/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="IBUMBLEBEE">
+          <p class="site-author-name" itemprop="name">IBUMBLEBEE</p>
+           
+              <p class="site-description motion-element" itemprop="description">学无止境</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-面向对象编程思想"><span class="nav-number">1.</span> <span class="nav-text">Python 面向对象编程思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象常用术语"><span class="nav-number">2.</span> <span class="nav-text">面向对象常用术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python封装机制及实现方法"><span class="nav-number">2.1.</span> <span class="nav-text">Python封装机制及实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-继承机制"><span class="nav-number">2.2.</span> <span class="nav-text">Python 继承机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python多继承"><span class="nav-number">2.2.1.</span> <span class="nav-text">Python多继承</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python多态"><span class="nav-number">2.3.</span> <span class="nav-text">python多态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">IBUMBLEBEE</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
