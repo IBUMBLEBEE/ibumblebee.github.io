@@ -335,13 +335,13 @@
       
         
           
-            <h1 id="Supervisor-进程管理工具部署"><a href="#Supervisor-进程管理工具部署" class="headerlink" title="Supervisor 进程管理工具部署"></a>Supervisor 进程管理工具部署</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install -y python-pip</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装的pip版本较低时升级，指定国内源</span></span><br><span class="line">pip install --upgrade pip -i https://pypi.doubanio.com/simple/</span><br><span class="line">pip install supervisor -i https://pypi.doubanio.com/simple/</span><br></pre></td></tr></table></figure>
+            <h2 id="Supervisor-进程管理工具部署"><a href="#Supervisor-进程管理工具部署" class="headerlink" title="Supervisor 进程管理工具部署"></a>Supervisor 进程管理工具部署</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum install -y python-pip</span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装的pip版本较低时升级，指定国内源</span></span><br><span class="line">pip install --upgrade pip -i https://pypi.doubanio.com/simple/</span><br><span class="line">pip install supervisor -i https://pypi.doubanio.com/simple/</span><br></pre></td></tr></table></figure>
 
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生产配置文件</span></span><br><span class="line">echo_supervisord_conf &gt;&gt; /etc/supervisor/supervisord.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建子进程管理配置目录</span></span><br><span class="line">mkdir /etc/supervisor/supervisord.d</span><br></pre></td></tr></table></figure>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生产配置文件</span></span><br><span class="line">echo_supervisord_conf &gt;&gt; /etc/supervisor/supervisord.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建子进程管理配置目录</span></span><br><span class="line">mkdir /etc/supervisor/supervisord.d</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 修改配置文件的几个地方，上面时原来的配置，下面为修改的配置</span><br><span class="line">[unix_http_server]</span><br><span class="line">;file=/tmp/supervisor.sock</span><br><span class="line">file=/opt/supervisor.sock</span><br><span class="line"></span><br><span class="line">[supervisorctl]</span><br><span class="line">;serverurl=unix:///tmp/supervisor.sock</span><br><span class="line">serverurl=unix:///opt/supervisor.sock</span><br><span class="line"></span><br><span class="line">[include]</span><br><span class="line">;files = relative/directory/*.ini</span><br><span class="line">files = /etc/supervisor/supervisord.d/*.ini</span><br></pre></td></tr></table></figure>
 
-<h3 id="配置supervisor后台运行"><a href="#配置supervisor后台运行" class="headerlink" title="配置supervisor后台运行"></a>配置supervisor后台运行</h3><p>使用systemd管理</p>
+<h4 id="配置supervisor后台运行"><a href="#配置supervisor后台运行" class="headerlink" title="配置supervisor后台运行"></a>配置supervisor后台运行</h4><p>使用systemd管理</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt; EOF &gt;/usr/lib/systemd/system/supervisord.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=Process Monitoring and Control Daemon</span><br><span class="line">After=rc-local.service nss-user-lookup.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/bin/supervisord -c /etc/supervisor/supervisord.conf</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">EOF</span></span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl start supervisord</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看启动状态，有错排错</span></span><br><span class="line">systemctl status supervisord</span><br><span class="line">systemctl enable supervisord</span><br></pre></td></tr></table></figure>
 
 
@@ -1317,6 +1317,15 @@
 
           
 
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
           
 
         </nav>
